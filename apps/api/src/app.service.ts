@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { add } from "@parkingapp/sample-lib"
+import { Injectable } from '@nestjs/common'
+import { add } from '@parkingapp/sample-lib'
 
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!' + add(223, 2);
+    return 'Hello World!' + add(223, 2)
   }
 }
