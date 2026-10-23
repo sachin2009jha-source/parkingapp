@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "format": "prettier \"{apps, libs}/**/*.{ts, tsx, js, json}\" --ignore-path .gitignore",
+    "format:check": "pnpm format --check",
+    "format:write": "pnpm format --write",
+    "tsc": "pnpm --parallel -r run tsc",
+    "lint": "pnpm --parallel -r run lint",
+    "build": "pnpm --parallel -r run build",
+    "validate": "pnpm format:write && pnpm tsc && pnpm lint && pnpm build",
+    "prepare": "husky install"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +26,8 @@
   "packageManager": "pnpm@12.15.0",
   "type": "module",
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2",
+    "husky": "^8.0.0"
   }
 }
