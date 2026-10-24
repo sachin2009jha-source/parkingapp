@@ -3,25 +3,21 @@ import { UsersService } from './users.service.js'
 import { User } from './entities/user.entity.js'
 import { CreateUserInput } from './dto/create-user.input.js'
 import { UpdateUserInput } from './dto/update-user.input.js'
-import { RegisterCredentialsInput } from "./dto/register-credentials.input.js"
+import { RegisterCredentialsInput } from './dto/register-credentials.input.js'
 import { LoginCredentialsInput } from './dto/login-credentials.input.js'
-import { LoginResponse } from "./entities/login-response.entity.js"
+import { LoginResponse } from './entities/login-response.entity.js'
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Mutation(() => User)
-  registerWithCredentials(
-    @Args("input") input: RegisterCredentialsInput,
-  ) {
+  registerWithCredentials(@Args('input') input: RegisterCredentialsInput) {
     return this.usersService.registerWithCredentials(input)
   }
 
   @Mutation(() => LoginResponse)
-  loginWithCredentials(
-    @Args("input") input: LoginCredentialsInput
-  ) {
+  loginWithCredentials(@Args('input') input: LoginCredentialsInput) {
     return this.usersService.loginWithCredentials(input)
   }
 
