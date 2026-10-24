@@ -7,7 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { ConfigModule } from '@nestjs/config'
 import { UsersModule } from './users/users.module.js'
-import type { Request, Response } from "express"
+import type { Request, Response } from 'express'
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule()
 
@@ -16,9 +16,9 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule()
     ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      context: ({ req, res }: { req: Request, res: Response }) => ({
+      context: ({ req, res }: { req: Request; res: Response }) => ({
         req,
-        res
+        res,
       }),
       introspection: true,
       fieldResolverEnhancers: ['guards'],
