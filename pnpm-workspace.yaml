@@ -2,6 +2,7 @@ packages:
   - "apps/*"
   - "libs/*"
 allowBuilds:
+  '@apollo/protobufjs': true
   esbuild: true
   unrs-resolver: false
   workerd: true
