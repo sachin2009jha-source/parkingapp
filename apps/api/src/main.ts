@@ -13,8 +13,8 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true
-    })
+      whitelist: true,
+    }),
   )
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Parking App API')
@@ -23,10 +23,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build()
 
-  const swaggerDocument = SwaggerModule.createDocument(
-    app,
-    swaggerConfig,
-  )
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig)
 
   SwaggerModule.setup('/', app, swaggerDocument)
 
@@ -34,4 +31,3 @@ async function bootstrap() {
 }
 
 await bootstrap()
-
