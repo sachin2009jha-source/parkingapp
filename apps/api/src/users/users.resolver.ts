@@ -6,8 +6,8 @@ import { UpdateUserInput } from './dto/update-user.input.js'
 import { RegisterCredentialsInput } from './dto/register-credentials.input.js'
 import { LoginCredentialsInput } from './dto/login-credentials.input.js'
 import { LoginResponse } from './entities/login-response.entity.js'
-import { UseGuards } from "@nestjs/common"
-import { JwtAuthGuard } from "../common/auth/jwt-auth.guard.js"
+import { UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '../common/auth/jwt-auth.guard.js'
 
 @Resolver(() => User)
 export class UsersResolver {
