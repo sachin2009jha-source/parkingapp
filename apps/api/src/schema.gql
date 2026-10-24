@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  uid: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  image: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+}
+
+input CreateUserInput {
+  uid: ID!
+  name: String
+  image: String
+}
+
+input UpdateUserInput {
+  uid: ID
+  name: String
+  image: String
+  id: Int!
+}
