@@ -1,14 +1,19 @@
-import { Injectable, ConflictException } from '@nestjs/common'
+import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common'
 import { CreateUserInput } from './dto/create-user.input.js'
 import { UpdateUserInput } from './dto/update-user.input.js'
 import { RegisterCredentialsInput } from './dto/register-credentials.input.js'
 import { PrismaService } from '../common/prisma/prisma.service.js'
 import { randomUUID } from 'node:crypto'
-import { hash } from 'bcryptjs'
+import { hash, compare } from 'bcryptjs'
+import { LoginCredentialsInput } from './dto/login-credentials.input.js'
+import { JwtService } from "@nestjs/jwt"
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService
+  ) {}
 
   async registerWithCredentials(input: RegisterCredentialsInput) {
     const email = input.email.trim().toLowerCase()
@@ -44,6 +49,37 @@ export class UsersService {
       ...user,
       createdAt: new Date(String(user.createdAt)),
       updatedAt: new Date(String(user.updatedAt)),
+    }
+  }
+
+  async loginWithCredentials(input: LoginCredentialsInput) {
+    const email = input.email.trim().toLowerCase()
+
+    const credentials = await this.prisma.db.orm.public.Credentials
+    .where({ email })
+    .first()
+
+    if(!credentials) {
+      throw new UnauthorizedException("Invalid email or password")
+    }
+
+    const passwordMatches = await compare(
+      input.password,
+      credentials.passwordHash
+    )
+
+    if(!passwordMatches) {
+      throw new UnauthorizedException("Invalid email or password")
+    }
+
+    const accessToken = await this.jwtService.signAsync({
+      sub: credentials.uid,
+      email: credentials.email
+    })
+
+    return {
+      accessToken,
+      tokenType: "Bearer"
     }
   }
 
