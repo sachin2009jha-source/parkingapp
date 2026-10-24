@@ -3,6 +3,7 @@ packages:
   - "libs/*"
 allowBuilds:
   '@apollo/protobufjs': true
+  '@scarf/scarf': false
   esbuild: true
   unrs-resolver: false
   workerd: true

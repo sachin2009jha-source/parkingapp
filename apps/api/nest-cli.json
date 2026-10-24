@@ -5,7 +5,8 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "plugins": [
-      {"name": "@nestjs/graphql"}
+      {"name": "@nestjs/graphql"},
+      {"name": "@nestjs/swagger"}
     ]
   }
 }

@@ -7,7 +7,7 @@ import { PrismaService } from '../common/prisma/prisma.service.js'
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createUserInput: CreateUserInput){
+  async create(createUserInput: CreateUserInput) {
     const user = await this.prisma.db.orm.public.User.create({
       uid: createUserInput.uid,
       name: createUserInput.name ?? null,
@@ -17,7 +17,7 @@ export class UsersService {
     return {
       ...user,
       createdAt: new Date(String(user.createdAt)),
-      updatedAt: new Date(String(user.updatedAt))
+      updatedAt: new Date(String(user.updatedAt)),
     }
   }
 
@@ -26,7 +26,7 @@ export class UsersService {
     return users.map((user) => ({
       ...user,
       createdAt: new Date(String(user.createdAt)),
-      updatedAt: new Date(String(user.updatedAt))
+      updatedAt: new Date(String(user.updatedAt)),
     }))
   }
 
