@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common'
 import { createObserveModule } from '@nestjs/observe'
 import { AppController } from './app.controller.js'
 import { AppService } from './app.service.js'
-import { GraphQLModule } from "@nestjs/graphql"
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo"
-import { join } from "path"
-import { ConfigModule } from "@nestjs/config"
-import { UsersModule } from './users/users.module.js';
+import { GraphQLModule } from '@nestjs/graphql'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { join } from 'path'
+import { ConfigModule } from '@nestjs/config'
+import { UsersModule } from './users/users.module.js'
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule()
 
@@ -19,8 +19,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule()
       fieldResolverEnhancers: ['guards'],
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       buildSchemaOptions: {
-        numberScalarMode: 'integer'
-      }
+        numberScalarMode: 'integer',
+      },
     }),
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com,
