@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
-import { ConfigService } from "@nestjs/config"
+import { ConfigService } from '@nestjs/config'
 
 @Module({
   imports: [
@@ -10,10 +10,10 @@ import { ConfigService } from "@nestjs/config"
         secret: ConfigService.getOrThrow<string>('JWT_SECRET'),
         signOptions: {
           algorithm: 'HS256',
-          expiresIn: '1d'
-        }
-      })
-    })
+          expiresIn: '1d',
+        },
+      }),
+    }),
   ],
   exports: [JwtModule],
 })
