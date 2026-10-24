@@ -1,25 +1,23 @@
 import { Injectable, ConflictException } from '@nestjs/common'
 import { CreateUserInput } from './dto/create-user.input.js'
 import { UpdateUserInput } from './dto/update-user.input.js'
-import { RegisterCredentialsInput } from "./dto/register-credentials.input.js"
+import { RegisterCredentialsInput } from './dto/register-credentials.input.js'
 import { PrismaService } from '../common/prisma/prisma.service.js'
-import { randomUUID } from "node:crypto"
-import { hash } from "bcryptjs"
+import { randomUUID } from 'node:crypto'
+import { hash } from 'bcryptjs'
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async registerWithCredentials(input: RegisterCredentialsInput) {
-
     const email = input.email.trim().toLowerCase()
 
-    const existingCredentials = await this.prisma.db.orm.public.Credentials.where({ email }).first()
+    const existingCredentials =
+      await this.prisma.db.orm.public.Credentials.where({ email }).first()
 
-    if(existingCredentials){
-      throw new ConflictException(
-        "An account with this email already exists"
-      )
+    if (existingCredentials) {
+      throw new ConflictException('An account with this email already exists')
     }
 
     const uid = randomUUID()
@@ -29,23 +27,23 @@ export class UsersService {
       uid,
       name: input.name ?? null,
       image: input.image ?? null,
-      Credentials: (credentials) => 
+      Credentials: (credentials) =>
         credentials.create({
           uid,
           email,
-          passwordHash 
+          passwordHash,
         }),
-      AuthProvider: (provider) => 
+      AuthProvider: (provider) =>
         provider.create({
           uid,
-          type: 'CREDENTIALS'
-        })
+          type: 'CREDENTIALS',
+        }),
     })
 
     return {
       ...user,
       createdAt: new Date(String(user.createdAt)),
-      updatedAt: new Date(String(user.updatedAt))
+      updatedAt: new Date(String(user.updatedAt)),
     }
   }
 

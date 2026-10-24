@@ -1,24 +1,24 @@
-import { Field, InputType } from "@nestjs/graphql"
-import { IsEmail, IsOptional, IsString, MinLength } from "class-validator"
+import { Field, InputType } from '@nestjs/graphql'
+import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator'
 
 @InputType()
 export class RegisterCredentialsInput {
-    @Field()
-    @IsEmail()
-    email!: string
+  @Field()
+  @IsEmail()
+  email!: string
 
-    @Field()
-    @IsString()
-    @MinLength(8)
-    password!: string
+  @Field()
+  @IsString()
+  @MinLength(8)
+  password!: string
 
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsString()
-    name?: string
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  name?: string
 
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsString()
-    image?: string
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  image?: string
 }
