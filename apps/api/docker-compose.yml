@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db: 
+    container_name: parkingapp
+    image: postgres
+    restart: always
+    ports:
+      - 2010:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data_parkingapp:/var/lib/postgresql
+
+volumes:
+  db_data_parkingapp:
